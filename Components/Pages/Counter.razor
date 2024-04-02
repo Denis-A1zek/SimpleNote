@@ -1,17 +1,20 @@
-﻿@page "/counter"
+﻿@page "/markdown"
+@using Markdig;
 
-<h1>Counter</h1>
-
-<p role="status">Current count: @currentCount</p>
-
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<div class="row">
+    <div class="col-6">
+        <textarea class="form-control" @bind-value="Body" @bind-value:event="oninput"></textarea>
+    </div>
+    <div class="col-6">
+        @if (!string.IsNullOrWhiteSpace(Body))
+        {
+            @((MarkupString)Preview)
+        }
+    </div>
+</div>
 
 @code {
-    private int currentCount = 0;
+    public string Body { get; set; }
 
-    private void IncrementCount()
-    {
-        currentCount++;
-    }
-
+    public string Preview => Markdown.ToHtml(Body);
 }
