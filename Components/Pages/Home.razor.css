@@ -1,0 +1,9 @@
+﻿.container{
+    display: flex;
+}
+
+.notespace,
+.sidebar {
+    display: flex;
+    flex-direction: column;
+}
